@@ -15,10 +15,10 @@ def game():
         you_input = input("Enter your guess (You can use 'x' to exit, 'n' for a new game, 's' to show the number): ").strip().lower()
 
         if you_input == "x":
-            print("Exiting the game. Goodbye!")
+            print("Exit the game!")
             exit(0)
         elif you_input == "n":
-            print("You chose to abandon this game.")
+            print("New game.")
             return play_again()
         elif you_input == "s":
             print(f"The hidden number is {number}.")
