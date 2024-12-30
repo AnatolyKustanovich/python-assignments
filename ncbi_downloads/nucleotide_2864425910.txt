@@ -1,0 +1,47 @@
+LOCUS       PQ681313                 467 bp    DNA     linear   PLN 10-DEC-2024
+DEFINITION  Alternaria brassicicola isolate N2 NEW internal transcribed spacer
+            1, partial sequence; 5.8S ribosomal RNA gene, complete sequence;
+            and internal transcribed spacer 2, partial sequence.
+ACCESSION   PQ681313
+VERSION     PQ681313.1
+KEYWORDS    .
+SOURCE      Alternaria brassicicola
+  ORGANISM  Alternaria brassicicola
+            Eukaryota; Fungi; Dikarya; Ascomycota; Pezizomycotina;
+            Dothideomycetes; Pleosporomycetidae; Pleosporales; Pleosporineae;
+            Pleosporaceae; Alternaria; Alternaria sect. Brassicicola.
+REFERENCE   1  (bases 1 to 467)
+  AUTHORS   Deka,B.
+  TITLE     Molecular study of Alternaria brassicicola
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 467)
+  AUTHORS   Deka,B.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (05-DEC-2024) Plant Pathology, Assam agricultural
+            university, Barbheta, Jorhat, Assam 785001, India
+COMMENT     ##Assembly-Data-START##
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..467
+                     /organism="Alternaria brassicicola"
+                     /mol_type="genomic DNA"
+                     /isolate="N2 NEW"
+                     /host="cauliflower"
+                     /db_xref="taxon:29001"
+                     /geo_loc_name="India"
+                     /collection_date="Feb-2024"
+     misc_RNA        <1..>467
+                     /note="contains internal transcribed spacer 1, 5.8S
+                     ribosomal RNA, and internal transcribed spacer 2"
+ORIGIN      
+        1 gcagcatctg ctgttggggc cagccttgct gaattattca cccgtgtctt ttgcgtactt
+       61 cttgtttcct tggtgggctc gcccaccaca aggacaaacc ataacctttt gtaattgcaa
+      121 tcagcgtcag taacaacata ataattacaa ctttcaacaa cggatctctt ggttctggca
+      181 tcgatgaaga acgcagcgaa atgcgataag tagtgtgaat tgcagaattc agtgaatcat
+      241 cgaatctttg aacgcacatt gcgccctttg gtattccaaa gggcatgcct gttcgagcgt
+      301 catttgtacc ctcaagcttt gcttggtgtt gggcgtcttg tctccagttt gctggagact
+      361 cgccttaaag tcattggcag ccggcctact ggtttcggag cgcagcacaa gtcgcgctct
+      421 cttccagcca aggtcagcat ccataaagcc ttttttcaac tttgacc
+//
+

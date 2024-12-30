@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .message {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #e8f4f8;
+            min-height: 50px;
+        }
+        .attempts {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+        .input-area {
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        #newGameBtn {
+            background-color: #008CBA;
+        }
+        #showNumberBtn {
+            background-color: #ff9800;
+        }
+        .game-over {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+        <div class="message" id="message">
+            {{ message }}
+        </div>
+        <div class="attempts" id="attempts">
+            Attempts: {{ attempts }}
+        </div>
+        <div class="input-area">
+            <input type="text" id="guessInput" placeholder="1-20" {% if game_over %}disabled{% endif %}>
+        </div>
+        <div class="buttons">
+            <button id="guessBtn" {% if game_over %}disabled{% endif %}>Submit Guess</button>
+            <button id="showNumberBtn" {% if game_over %}disabled{% endif %}>Show Number (S)</button>
+            <button id="newGameBtn">New Game (N)</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageDiv = document.getElementById('message');
+            const attemptsDiv = document.getElementById('attempts');
+            const guessInput = document.getElementById('guessInput');
+            const guessBtn = document.getElementById('guessBtn');
+            const newGameBtn = document.getElementById('newGameBtn');
+            const showNumberBtn = document.getElementById('showNumberBtn');
+
+            function updateUI(data) {
+                messageDiv.textContent = data.message;
+                if (data.attempts !== undefined) {
+                    attemptsDiv.textContent = `Attempts: ${data.attempts}`;
+                }
+                if (data.game_over) {
+                    guessInput.disabled = true;
+                    guessBtn.disabled = true;
+                    showNumberBtn.disabled = true;
+                    messageDiv.classList.add('game-over');
+                } else {
+                    guessInput.disabled = false;
+                    guessBtn.disabled = false;
+                    showNumberBtn.disabled = false;
+                    messageDiv.classList.remove('game-over');
+                }
+                guessInput.value = '';
+                guessInput.focus();
+            }
+
+            function handleGuess() {
+                const guess = guessInput.value.trim();
+                if (guess === '') return;
+
+                fetch('/guess', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `guess=${encodeURIComponent(guess)}`
+                })
+                .then(response => response.json())
+                .then(updateUI);
+            }
+
+            function startNewGame() {
+                fetch('/new-game', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(updateUI);
+            }
+
+            guessBtn.addEventListener('click', handleGuess);
+            guessInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleGuess();
+            });
+            newGameBtn.addEventListener('click', startNewGame);
+            showNumberBtn.addEventListener('click', function() {
+                fetch('/guess', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'guess=s'
+                })
+                .then(response => response.json())
+                .then(updateUI);
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key.toLowerCase() === 'n') {
+                    startNewGame();
+                } else if (e.key.toLowerCase() === 's') {
+                    showNumberBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
