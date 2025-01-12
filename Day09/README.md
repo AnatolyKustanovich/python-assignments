@@ -8,8 +8,7 @@ This tool analyzes DNA sequences from FASTA or GenBank files. It supports two op
 
 # Requirements
 
-Ensure you have Python installed.
-biopyrhon>=1.8
+Ensure you have Python installed and biopython>=1.8
 
 # Usage
 
