@@ -16,6 +16,7 @@ def find_longest_duplicate(sequence):
     return longest
 
 def calculate_gc_content(sequence):
+    sequence = sequence.upper()
     gc_count = sequence.count("G") + sequence.count("C")
     return (gc_count / len(sequence)) * 100 if len(sequence) > 0 else 0
 
